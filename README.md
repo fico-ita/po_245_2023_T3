@@ -124,7 +124,7 @@ projeto. Informe seus links de acesso.
 Escolha um bom nome de projeto e adicione as imagens dos apoiadores para deixar sua
 documentação com uma imagem mais profissional.
 
-## Como citar
+## How to cite
 
 Copie aqui a forma de citação do software em formato de desejar e inclua o arquivo
 [CITATION.cff](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-citation-files) no projeto.

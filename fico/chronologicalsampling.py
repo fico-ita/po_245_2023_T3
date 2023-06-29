@@ -18,16 +18,16 @@ import pandas as pd
 
 
 def volume_bars(
-    volume: pd.Series,
-    close: pd.Series,
-    traded_volume: int,
+    volume: pd.Series[float],
+    close: pd.Series[float],
+    traded_volume: float,
 ) -> pd.DataFrame:
     """Function to create volume bars with the OHLC [open, high, low, close] prices.
 
     Parameters:
-        volume (pd.Series): Volume of a given stock in a given period.
-        close (pd.Series): Close prices of a given stock in a given period.
-        traded_volume (int): Number of shares traded in each bar.
+        volume (pd.Series[float]): Volume of a given stock in a given period.
+        close (pd.Series[float]): Close prices of a given stock in a given period.
+        traded_volume (float): Number of shares traded in each bar.
 
     Returns:
         volume_bars_ohlc (pd.DataFrame): Dataframe with the volume bars with the OHLC \
@@ -58,15 +58,15 @@ def volume_bars(
 
 
 def dollar_bars(
-    volume: pd.Series,
-    close: pd.Series,
+    volume: pd.Series[float],
+    close: pd.Series[float],
     dollar_amount: float,
 ) -> pd.DataFrame:
     """Function to create dollar bars with the OHLC [open, high, low, close] prices.
 
     Parameters:
-        volume (pd.Series): Volume of a given stock in a given period.
-        close (pd.Series): Close prices of a given stock in a given period.
+        volume (pd.Series[float]): Volume of a given stock in a given period.
+        close (pd.Series[float]): Close prices of a given stock in a given period.
         dollar_amount (float): Dollar amount traded in each bar.
 
     Returns:
@@ -95,11 +95,11 @@ def dollar_bars(
     return dollar_bars_ohlc
 
 
-def time_bars(close: pd.Series, time_range: str) -> pd.DataFrame:
+def time_bars(close: pd.Series[float], time_range: str) -> pd.DataFrame:
     """Function to create time bars with the OHLC [open, high, low, close] prices.
 
     Parameters:
-        close (pd.Series): Close prices of a given stock in a given period.
+        close (pd.Series[float]): Close prices of a given stock in a given period.
         time_range (str): Time period for the bars (e.g., '3d' for 3 days).
 
     Returns:
@@ -110,6 +110,4 @@ def time_bars(close: pd.Series, time_range: str) -> pd.DataFrame:
     time_bars_df = pd.DataFrame({"close": close})
 
     # Group the dataframe by the time range and aggregate the close prices
-    return time_bars_df.groupby(pd.Grouper(freq=time_range)).agg(
-        {"close": "ohlc"},
-    )
+    return time_bars_df.groupby(pd.Grouper(freq=time_range)).agg({"close": "ohlc"})

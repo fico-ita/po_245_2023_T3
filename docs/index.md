@@ -1,65 +1,79 @@
-# Bem-vindo ao FICO
+# Welcome to FICO
 
-Leia a documentação do Mkdocs em [mkdocs.org](https://www.mkdocs.org).
+FICO-ITA is a multidisciplinary interest group in Computational Finance and Systematic
+Investments operating within the ITA, in Brazil.
+([FICO](https://fico-ita.github.io/en/fico/))
 
-## Comandos
+## Project
 
-* `mkdocs new [dir-name]` - Cria um novo projeto.
-* `mkdocs serve` - Inicia o servidor live-reloading de documentação.
-* `mkdocs build` - Constrói o site da documentação.
-* `mkdocs -h` - Imprime a mensagem de ajuda.
+Project originated within the scope of course of Machine Learning in Finance, in the
+Post Graduation Program of Operational Research, at Aeronautics Institute of Technology
+(ITA), São José dos Campos, SP, Brazil. The project is a **meta-labeling application**
+for financial time series, with the purpose of predicting the direction of the next
+price. This project is available on [GitHub](https://github.com/fico-ita/po_245_2023_T3)
+repository.
 
-## Estrutura da documentação
+## Documentation structure
 
-    mkdocs.yml    # Arquivo de configuração.
-    docs/
-        index.md  # Página principal da documentação
-        ...       # Outras páginas via markdown, imagens e outros arquivos.
+This documentation has the purpose of presenting the understanding of the methods and
+techniques used in the project, in addition of clarifying the decisions made during the
+development of the solution.
 
-## Organização da documentação
+The documentation was designed for the reader user of the solution. In addition,
+considers the documentation for academic and software engineering purposes, i.e., with
+the intention to allow the reader to develop the project.
 
-Para a organização da documentação de usuário, baseie-se na proposta de
-[Diátaxis](https://diataxis.fr/), que consiste em 4 classes de documentos:
+The documentation is organized in 4 topcis, according to the type:
 
 1. Tutorials
-1. How-To guides
-1. Reference
-1. Explanation
+2. How-To guides
+3. Reference
+4. Explanation
 
-!!! warning
-    Não é obrigatório seguir Diátaxis. Ela serve apenas como guia.
+On the Tutorial topic, the reader will find a learning-oriented documentation, with a
+practical application of the solution. The How-To guides topic is a documentation with a
+ step-by-step guide to perform a specific task. The Reference topic is a documentation
+ with a detailed description of the methods and techniques used in the solution. The
+ Explanation topic is a documentation with a detailed description of the solution,
+ with the purpose of clarifying the decisions made during the development of the
+ solution.
 
-As documentações acima são pensadas para o leitor usuário da solução.
-
-Deve-se ainda considerar a documentação para fins acadêmicos e de engenharia de
-software, i.e., quando quem desenvolve o projeto é o leitor. Caso contrário,
-atualizações podem se tornar impraticáveis.
-
-Esta documentação possui grande intersecção com *Explanation*. A diferença é que o
-público de *Explanation* é o usuário da solução, enquanto na documentação acadêmica e
-para desenvolvimento o público alvo são os desenvolvedores e arquitetos da solução.
-
-Nesta documentação o foco é destacar as tomadas de decisão e organização da solução,
-preferencialmente apesentando um diagrama de componentes da solução e como eles se
-interagem. Em nossa disciplina, iremos incluir o artigo como forma de atingir estes
-objetivos.
-
-## Calculadora FICO
+## FICO packages
 
 ::: fico
 
-## Projeto
+## Article
 
-Adicione aqui o pdf do artigo.
+The article is available on document
+[finance-machine-learning-meta-labeling-application](/materials/lima2023finance.pdf).
 
-# Licença
+# License
 
-Similar ao README.md
+Project under license [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 
-## Agradecimento
+## Acknowledgements
 
-Similar ao README.md
+The author is grateful to the professors and colleagues of the course for the
+discussions and suggestions that contributed to the development of this project.
 
-## Como citar
+## How to cite
 
-Similar ao README.md
+Since this project is a research based project, it is important to cite it in your work.
+To cite this project, use the following reference:
+
+### BibTeX
+```bibtex
+@misc{lima2023finance,
+    author = {Lima, R. D. C.},
+    title = {Finance Machine Learning: Meta-Labeling Application},
+    year = {2023},
+    DOI = {10.5281/zenodo.0000000},
+    publisher = {Zenodo},
+    url = {https://doi.org/10.5281/zenodo.0000000}
+}
+```
+### APA
+```text
+Lima, R.D.C.(2023), Finance Machine Learning: Meta-Labeling Application.
+Zenodo. https://doi.org/10.5281/zenodo.0000000
+```
