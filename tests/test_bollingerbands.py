@@ -1,12 +1,12 @@
 import pandas as pd  # noqa: INP001, D100
 
-from fico.technicalindicators import bollingerbands
+from fico.technicalindicators import bollingerbandssignal
 
 data = pd.read_csv("data/data.csv")
 close = data["close"]
 
-mean_ewm, upper_band, lower_band = bollingerbands(close, 50, 2)
+df = bollingerbandssignal(close, 50, 1)  # noqa: PD901
 
-print(mean_ewm)
-print(upper_band)
-print(lower_band)
+df.head()
+
+df.loc[(df.side_short == 1) | (df.side_long == 1)].head()

@@ -26,7 +26,7 @@ The package can be imported as follows:
    get_t_events, get_volatility
 ```
 
-## How To Get Bollinger Bands Series?
+## How To Get Bollinger Bands with labels and signals?
 
 You have a time series of prices and you want to get the Bollinger Bands series.
 On the following example, we will use the `bollingerbands()` function from the
@@ -34,49 +34,25 @@ On the following example, we will use the `bollingerbands()` function from the
 directory of the repository, run the following commands:
 
 ```python
->>> import pandas as pd
+>>> import pandas as pd  # noqa: INP001, D100
+>>> from fico.technicalindicators import bollingerbandssignal
 >>> data = pd.read_csv("data/data.csv")
 >>> close = data["close"]
->>> mean_ewm, upper_band, lower_band = bollingerbands(close, 50, 2)
->>> print(mean_ewm)
-0        74.090000
-1        75.589400
-2        76.446090
-3        77.364705
-4        78.414970
-           ...
-5089    132.199143
-5090    131.879569
-5091    131.545860
-5092    131.300533
-5093    131.222472
-Name: close, Length: 5094, dtype: float64
->>> print(upper_band)
-0              NaN
-1        79.747188
-2        80.541316
-3        82.205566
-4        84.515527
-           ...
-5089    146.176307
-5090    145.947713
-5091    145.733444
-5092    145.421881
-5093    145.086156
-Name: close, Length: 5094, dtype: float64
->>> print(lower_band)
-0              NaN
-1        71.431612
-2        72.350864
-3        72.523843
-4        72.314413
-           ...
-5089    118.221979
-5090    117.811425
-5091    117.358277
-5092    117.179184
-5093    117.358789
-Name: close, Length: 5094, dtype: float64
+>>> df = bollingerbandssignal(close, 50, 1)
+>>> df.head()
+   close   ewm_mean      upper      lower  label  side_long  side_short
+0  74.09  74.090000        NaN        NaN    NaN        NaN         NaN
+1  77.03  75.589400  77.668294  73.510506    NaN        NaN         NaN
+2  78.06  76.446090  78.493703  74.398477    NaN        NaN         NaN
+3  79.91  77.364705  79.785135  74.944274   -1.0        NaN         NaN
+4  82.22  78.414970  81.465249  75.364691   -1.0        NaN         NaN
+>>> df.loc[(df.side_short == 1) | (df.side_long == 1)].head()
+     close   ewm_mean      upper      lower  label  side_long  side_short
+12   77.72  81.092143  84.249824  77.934462    1.0        1.0        -1.0
+51   78.83  75.213832  77.892723  72.534942   -1.0       -1.0         1.0
+108  76.53  80.911830  84.266327  77.557332    1.0        1.0        -1.0
+168  81.99  79.154590  81.001386  77.307793   -1.0       -1.0         1.0
+300  87.20  91.504157  94.573599  88.434715    1.0        1.0        -1.0
 ```
 
 ## How To Get Change the Sampling Frequency of a Time Series?
@@ -149,4 +125,119 @@ date
 2023-03-23  123.37  129.31  123.37  129.31  14951189
 
 [2416 rows x 5 columns]
+```
+
+## How To Label a Time Series with a Triple Barrier Method?
+
+You have a time series of prices and you want to label the time series with a
+triple barrier method. On the following example, we will use the
+`add_vertical_barrier()`,`get_bins()`,`get_events()`,`get_t_events()` functions from
+the `fico.triplebarriers` module. For that on your python console on the same directory
+of the repository, run the following commands:
+
+```python
+>>> import numpy as np
+>>> import pandas as pd
+>>> from fico.triplebarriers import (
+...     add_vertical_barrier,
+...     get_bins,
+...     get_events,
+...     get_t_events,
+... )
+>>>
+>>> data = pd.read_csv("data/data.csv")
+ pd.to_datetime(data["date"])
+data = data.set_inde>>> data["date"] = pd.to_datetime(data["date"])
+>>> data = data.set_index("date")
+>>> close = data["adj_close"]
+>>> close.name = "close"
+>>> stock_df = pd.DataFrame(close)
+>>> span0 = 50
+>>> daily_vol = np.log(stock_df.close).diff().dropna().ewm(span=span0).std()
+>>> daily_vol
+date
+2003-01-02         NaN
+2003-01-03    0.018014
+2003-01-06    0.012677
+2003-01-07    0.010379
+2003-01-08    0.023456
+                ...
+2023-03-21    0.011021
+2023-03-22    0.011400
+2023-03-23    0.011192
+2023-03-24    0.011514
+2023-03-27    0.013037
+Name: close, Length: 5093, dtype: float64
+>>> threshold = daily_vol.mean() * 1
+>>> cusum_events = get_t_events(stock_df.close, threshold=threshold)
+sum_events
+>>> cusum_events
+DatetimeIndex(['2003-01-03', '2003-01-06', '2003-01-07', '2003-01-08',
+               '2003-01-09', '2003-01-14', '2003-01-16', '2003-01-17',
+               '2003-01-22', '2003-01-23',
+               ...
+               '2023-02-21', '2023-02-28', '2023-03-06', '2023-03-07',
+               '2023-03-09', '2023-03-15', '2023-03-20', '2023-03-22',
+               '2023-03-24', '2023-03-27'],
+              dtype='datetime64[ns]', length=1746, freq=None)
+>>> vertical_barriers = add_vertical_barrier(
+...     t_events=cusum_events,
+...     close=close,
+...     num_days=5,
+...     )
+>>> vertical_barriers
+2003-01-03   2003-01-08
+2003-01-06   2003-01-13
+2003-01-07   2003-01-13
+2003-01-08   2003-01-13
+2003-01-09   2003-01-14
+                ...
+2023-03-07   2023-03-13
+2023-03-09   2023-03-14
+2023-03-15   2023-03-20
+2023-03-20   2023-03-27
+2023-03-22   2023-03-27
+Name: date, Length: 1744, dtype: datetime64[ns]
+>>> pt_sl = np.array([1, 2])
+>>> min_ret = 0.0005
+>>> triple_barrier_events = get_events(
+...     close=stock_df.close,
+...     t_events=cusum_events,
+...     pt_sl=pt_sl,
+...     target=daily_vol,
+...     min_ret=min_ret,
+...     vertical_barriers=vertical_barriers,
+... )
+events
+>>>
+>>> triple_barrier_events
+                   t1      trgt
+2003-01-03 2003-01-06  0.018014
+2003-01-06 2003-01-07  0.012677
+2003-01-07 2003-01-08  0.010379
+2003-01-08 2003-01-09  0.023456
+2003-01-09 2003-01-14  0.022007
+...               ...       ...
+2023-03-15 2023-03-16  0.010597
+2023-03-20 2023-03-22  0.011161
+2023-03-22 2023-03-27  0.011400
+2023-03-24 2023-03-27  0.011514
+2023-03-27        NaT  0.013037
+
+[1746 rows x 2 columns]
+>>> labels = get_bins(triple_barrier_events, stock_df.close, True)
+()
+>>> labels.bin.value_counts()
+bin
+ 1    667
+-1    556
+ 0    522
+Name: count, dtype: int64
+>>> labels.head()
+                 ret  bin      trgt
+2003-01-03  0.023873    1  0.018014
+2003-01-06  0.028713    1  0.012677
+2003-01-07 -0.020986   -1  0.010379
+2003-01-08  0.033441    1  0.023456
+2003-01-09  0.018046    0  0.022007
 ```

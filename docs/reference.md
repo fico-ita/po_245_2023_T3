@@ -3,10 +3,6 @@ Use it as a reference for the technical implementation of the methods project co
 
 # FICO methods
 
-## Triple barrier methods
-
-::: fico.triplebarriers
-
 ## Chronological Sampling methods
 
 ::: fico.chronologicalsampling
@@ -14,3 +10,7 @@ Use it as a reference for the technical implementation of the methods project co
 ## Technical Indicators methods
 
 ::: fico.technicalindicators
+
+## Triple barrier methods
+
+::: fico.triplebarriers
