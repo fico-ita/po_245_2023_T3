@@ -8,7 +8,7 @@ Investments operating within the ITA, in Brazil.
 
 Project originated within the scope of course of Machine Learning in Finance, in the
 Post Graduation Program of Operational Research, at Aeronautics Institute of Technology
-(ITA), São José dos Campos, SP, Brazil. The project is a **meta-labeling application**
+(ITA), São José dos Campos, SP, Brazil. The project is a **Meta-Labeling Application**
 for financial time series, with the purpose of predicting the direction of the next
 price. This project is available on [GitHub](https://github.com/fico-ita/po_245_2023_T3)
 repository.
@@ -58,7 +58,7 @@ discussions and suggestions that contributed to the development of this project.
 
 ## How to cite
 
-Since this project is a research based project, it is important to cite it in your work.
+Since this project is research based, and it is important to cite it in your work.
 To cite this project, use the following reference:
 
 ### BibTeX
