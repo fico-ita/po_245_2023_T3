@@ -1,134 +1,82 @@
-# Estrutura FICO
+# FICO T3
 
-Documentação do pacote XXX no Github.
-Utilize o README.md mais como um ponteiro para a documentação oficial e instruções
-pertinentes.
+FICO is a multidisciplinary interest group in Computational Finance and Systematic
+Investments operating.
 
-Não esqueça de preencher as seções *Como citar* e *Agradecimento*, citando
-explicitamente as empresas parceiras que apoiaram a solução.
+## Project
 
-# TODO
+On this repository, you will find the code for the **Meta-Labeling Application** for financial
 
-- Falta adicionar testes e log
-- Mudar pasta padrão de código para src
-- Testar empacotamento
+## Usage
 
-## Estrutura
-
-Esta estrutura utiliza basicamente
-
-- Poetry como ferramenta de empacotamento e gerenciador de pacotes
-- [Mkdocs](https://www.mkdocs.org/) para documentação, com template
-  [Material](https://squidfunk.github.io/mkdocs-material/setup/), e
-  [mkdocstrings](https://mkdocstrings.github.io/) para formatação do docstring no
-  [formato Google](https://google.github.io/styleguide/pyguide.html)
-- Ruff e Black são usados para estilo de código
-- Pre-commit é utilizado para verificações antes de `commit`
-
-Lembre-se que o pacote deve conter a parte reproduzível de seu projeto. O uso deve ser
-construído como um dos exemplos ou em outro repositório, que utiliza este pacote.
-### Por onde começar
-
-O arquivo `pyproject.toml` é o arquivo principal de configuração do pacote. Altere a
-seção `[tool.poetry]`.
-
-A estrutura é configurada com um mínimo de funcionalidades para obter bons resultados,
-mas talvez você queira melhorar a configuração conforme compreender as ferramentas.
-
-A configuração de pacotes é feita com Poetry ao invés de pip.
+### Installation
 
 ```bash
-# ative o virtual environment
-cd pasta_projeto
+# Activate the virtual environment
+cd project_folder
 poetry shell
 
-# instalar pacotes do projeto
+# Add the project packages
+poetry add git+https://github.com/fico-ita/po_245_2023_T3.git
+
+# Install the project packages
 poetry install
-
-# adicione uma biblioteca necessária
-poetry add nome_biblioteca
-# o pacote será adicionado em [tool.poetry.dependencies] de pyproject.toml
-
-# caso queira adicionar uma biblioteca necessária para desenvolvimento e não para uso
-# do pacote
-poetry add add --group dev nome_biblioteca
-
-# Dica: ative o ambiente virtual e depois chame o IDE (e.g. code .) para o encontrar
 ```
 
-Ao contrário do tradicional, neste configuração, o código fonte pode ser encontrado
-dentro da pasta (pacote python) `fico`. A documentação na pasta `docs`. Caso desejar,
-exclua o `main.py`, que é apenas um script dummy.
+### Requirements
 
-Note que não há testes nesta estrutura, o que é crucial, mas que não é exigido neste
-trabalho acadêmico.
+Python 3.11 or higher is required. The project requires the following packages:
 
-Esta estrutura exige python 3.11. Talvez tenha que o instalar, assim como outras
-ferramentas e pacotes. Adicionalmente, também já está incluso uma pequena configuração
-para o vscode.
+- `pandas`
+- `numpy`
+- `scikit-learn`
+- `matplotlib`
+- `seaborn`
 
-### Commits
+### Example
 
-Antes de começar a fazer commits, inicialize a configuração do `pre-commit`.
-
-```bash
-# Para fazer, use o comando
-pre-commit install
+```python
+>>> import pandas as pd
+>>> from fico.technicalindicators import bollingerbandssignal
+>>> close = pd.read_csv("data/data.csv")["close"]
+>>> df = bollingerbandssignal(close, 50, 1)
+>>> df.head()
+   close   ewm_mean      upper      lower  label  side_long  side_short
+0  74.09  74.090000        NaN        NaN    NaN        NaN         NaN
+1  77.03  75.589400  77.668294  73.510506    NaN        NaN         NaN
+2  78.06  76.446090  78.493703  74.398477    NaN        NaN         NaN
+3  79.91  77.364705  79.785135  74.944274   -1.0        NaN         NaN
+4  82.22  78.414970  81.465249  75.364691   -1.0        NaN         NaN
 ```
 
-Ao fazer commits, caso receba alguma mensagem de erro, pode-se executar apenas o id que
-resultou em erro.
-Por exemplo, se o id `fix-encoding-pragma` resultou em erro
+## Documentation
 
-```bash
-# execute apenas esta verificação
-pre-commit run fix-encoding-pragma
+The documentation is available on [GitHub](
+    http://127.0.0.1:8000/
+    )
 
-# analise as alterações feitas nos arquivos e mensagem de erro
-# faça stage das alternações
-git add file_name
+## License
 
-# verifique novamente
-pre-commit run fix-encoding-pragma
+[Apache License 2.0](LICENSE)
 
-# se tudo der certo, pode tentar o commit novamente
+## Citation
+
+Since this project is research based, it is important to cite it in your work.
+To cite this project, use the following reference:
+
+### BibTeX
+```bibtex
+@misc{lima2023finance,
+    author = {Lima, R. D. C.},
+    title = {Finance Machine Learning: Meta-Labeling Application},
+    year = {2023},
+    DOI = {10.5281/zenodo.0000000},
+    publisher = {Zenodo},
+    url = {https://doi.org/10.5281/zenodo.0000000}
+}
 ```
-
-### Documentação
-
-Veja `docs` para servir a documentação.
-
-Um bom exemplo de Docstring no formato Google é o
-[Napoleon's documentation](https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html)
-
-Veja as [seções docstrings na extensão Napoleon](https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html)
-
-[Guia Khan](https://github.com/Khan/style-guides/blob/master/style/python.md#docstrings)
-sobre Docstring Google.
-
-## Git
-
-É aconselhável o uso do git utilizando o fluxo de trabalho conhecido como [Trunk Based
-Development (TBD)](https://cloud.google.com/architecture/devops/devops-tech-trunk-based-development),
-i.e., pequenos incrementos, ao invés de gitflow.
-
-## Licença
-
-Escolha a licença Apache 2.0 e deixe o repositório como privado, enquanto atinge um
-mínimo de qualidade. Inclua as licenças sobre os dados, quando houver, lembrando que
-os dados não devem ter controle de versão, ou seja, não os adicione em uma pasta do
-projeto. Informe seus links de acesso.
-
-## Agradecimento
-
-Escolha um bom nome de projeto e adicione as imagens dos apoiadores para deixar sua
-documentação com uma imagem mais profissional.
-
-## How to cite
-
-Copie aqui a forma de citação do software em formato de desejar e inclua o arquivo
-[CITATION.cff](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-citation-files) no projeto.
-
-Caso tenha, adicione também a citação do paper conceitual sobre a solução.
-
-Inclua também sua referência ao FICO.
+### APA
+```text
+Lima, R.D.C.(2023), Finance Machine Learning: Meta-Labeling Application.
+Zenodo. https://doi.org/10.5281/zenodo.0000000
+```

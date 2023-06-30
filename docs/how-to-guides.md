@@ -26,7 +26,7 @@ The package can be imported as follows:
    get_t_events, get_volatility
 ```
 
-## How To Get Bollinger Bands with labels and signals?
+## How To Get Bollinger Bands series, labels and signals?
 
 You have a time series of prices and you want to get the Bollinger Bands series.
 On the following example, we will use the `bollingerbands()` function from the
@@ -34,7 +34,7 @@ On the following example, we will use the `bollingerbands()` function from the
 directory of the repository, run the following commands:
 
 ```python
->>> import pandas as pd  # noqa: INP001, D100
+>>> import pandas as pd
 >>> from fico.technicalindicators import bollingerbandssignal
 >>> data = pd.read_csv("data/data.csv")
 >>> close = data["close"]
@@ -46,6 +46,7 @@ directory of the repository, run the following commands:
 2  78.06  76.446090  78.493703  74.398477    NaN        NaN         NaN
 3  79.91  77.364705  79.785135  74.944274   -1.0        NaN         NaN
 4  82.22  78.414970  81.465249  75.364691   -1.0        NaN         NaN
+>>>
 >>> df.loc[(df.side_short == 1) | (df.side_long == 1)].head()
      close   ewm_mean      upper      lower  label  side_long  side_short
 12   77.72  81.092143  84.249824  77.934462    1.0        1.0        -1.0
@@ -73,8 +74,6 @@ run the following commands:
 >>> close = data["adj_close"]
 >>> volume = data["volume"]
 >>> time_bars_ohlc = time_bars(close, time_range="3d")
->>> dollar_bars_ohlc = dollar_bars(volume, close, dollar_amount=1e9)
->>> volume_bars_ohlc = volume_bars(volume, close, traded_volume=1.2e7)
 >>> print(time_bars_ohlc)
              close
               open    high     low   close
@@ -92,6 +91,8 @@ date
 2023-03-25  129.31  129.31  129.31  129.31
 
 [2464 rows x 4 columns]
+>>>
+>>> dollar_bars_ohlc = dollar_bars(volume, close, dollar_amount=1e9)
 >>> print(dollar_bars_ohlc)
              close                            volume
               open    high     low   close    volume
@@ -108,6 +109,8 @@ date
 2023-03-27  129.31  129.31  129.31  129.31   6498029
 
 [2490 rows x 5 columns]
+>>>
+>>> volume_bars_ohlc = volume_bars(volume, close, traded_volume=1.2e7)
 >>> print(volume_bars_ohlc)
              close                            volume
               open    high     low   close    volume

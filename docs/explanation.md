@@ -86,3 +86,13 @@ https://www.wiley.com/en-us/Advances+in+Financial+Machine+Learning-p-97811194820
 
 [Sefidian, A. M. (2021) Labeling financial data for Machine Learning. Sefidian Academy](
     https://www.sefidian.com/2021/06/26/labeling-financial-data-for-machine-learning/)
+
+Further Readings:
+
+[Machine Learning Financial Laboratory (MlFinLab)](
+    https://github.com/hudson-and-thames/mlfinlab
+) by Hudson and Thames
+
+[Does Meta Labeling Add to Signal Efficacy?](
+https://hudsonthames.org/does-meta-labeling-add-to-signal-efficacy-triple-barrier-method/
+) by Ashutosh Singh and Jacques Joubert

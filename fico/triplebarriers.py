@@ -240,11 +240,11 @@ def get_events(  # noqa: PLR0913
               A value of 0 means that the respective horizontal barrier will be
               disabled. \\
         target (pd.Series): Series of values that are used (in conjunction with pt_sl)
-        to determine the width of the barrier.
+            to determine the width of the barrier. \\
         min_ret (float): The minimum target return required for running a triple
-        barrier search. \\
+            barrier search. \\
         vertical_barriers (pd.Series): A pandas series with the timestamps of the
-        vertical barriers. \\
+            vertical barriers. \\
         side (pd.Series): Side of the bet (long/short) as decided by the primary model.
 
     Returns:
