@@ -134,7 +134,7 @@ date
 
 You have a time series of prices and you want to label the time series with a
 triple barrier method. On the following example, we will use the
-`add_vertical_barrier()`,`get_bins()`,`get_events()`,`get_t_events()` functions from
+`add_vertical_barrier()`, `get_bins()`, `get_events()`, `get_t_events()` functions from
 the `fico.triplebarriers` module. For that on your python console on the same directory
 of the repository, run the following commands:
 
@@ -171,9 +171,9 @@ date
 2023-03-24    0.011514
 2023-03-27    0.013037
 Name: close, Length: 5093, dtype: float64
+>>>
 >>> threshold = daily_vol.mean() * 1
 >>> cusum_events = get_t_events(stock_df.close, threshold=threshold)
-sum_events
 >>> cusum_events
 DatetimeIndex(['2003-01-03', '2003-01-06', '2003-01-07', '2003-01-08',
                '2003-01-09', '2003-01-14', '2003-01-16', '2003-01-17',
@@ -183,6 +183,7 @@ DatetimeIndex(['2003-01-03', '2003-01-06', '2003-01-07', '2003-01-08',
                '2023-03-09', '2023-03-15', '2023-03-20', '2023-03-22',
                '2023-03-24', '2023-03-27'],
               dtype='datetime64[ns]', length=1746, freq=None)
+>>>
 >>> vertical_barriers = add_vertical_barrier(
 ...     t_events=cusum_events,
 ...     close=close,
@@ -201,6 +202,7 @@ DatetimeIndex(['2003-01-03', '2003-01-06', '2003-01-07', '2003-01-08',
 2023-03-20   2023-03-27
 2023-03-22   2023-03-27
 Name: date, Length: 1744, dtype: datetime64[ns]
+>>>
 >>> pt_sl = np.array([1, 2])
 >>> min_ret = 0.0005
 >>> triple_barrier_events = get_events(
@@ -211,7 +213,6 @@ Name: date, Length: 1744, dtype: datetime64[ns]
 ...     min_ret=min_ret,
 ...     vertical_barriers=vertical_barriers,
 ... )
-events
 >>>
 >>> triple_barrier_events
                    t1      trgt
@@ -228,8 +229,8 @@ events
 2023-03-27        NaT  0.013037
 
 [1746 rows x 2 columns]
+>>>
 >>> labels = get_bins(triple_barrier_events, stock_df.close, True)
-()
 >>> labels.bin.value_counts()
 bin
  1    667

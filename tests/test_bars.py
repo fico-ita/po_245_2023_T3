@@ -1,4 +1,6 @@
-import pandas as pd  # noqa: D100, INP001
+"""Tests for bars module."""  # noqa: INP001
+
+import pandas as pd
 
 from fico.chronologicalsampling import dollar_bars, time_bars, volume_bars
 

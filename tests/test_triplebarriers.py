@@ -1,4 +1,6 @@
-import numpy as np  # noqa: INP001, D100
+"""Tests to triplebarriers module."""  # noqa: INP001
+
+import numpy as np
 import pandas as pd
 
 from fico.triplebarriers import (

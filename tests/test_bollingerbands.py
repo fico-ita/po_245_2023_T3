@@ -1,4 +1,6 @@
-import pandas as pd  # noqa: INP001, D100
+"""Tests for bollingerbands module."""  # noqa: INP001
+
+import pandas as pd
 
 from fico.technicalindicators import bollingerbandssignal
 

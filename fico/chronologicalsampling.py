@@ -5,8 +5,8 @@ time, and dollar bars.
 
 The module contains the following functions:
 
-- `dollar_bars(dollar_volume, close, traded_dollar_volume)` - Creates dollar bars \
-with the OH LC
+- `dollar_bars(dollar_volume, close, traded_dollar_volume)` - Creates dollar bars
+    with the OH LC
 - `time_bars(close, time_delta)` - Creates time bars with the OHLC
 - `volume_bars(volume, close, traded_volume)` - Creates volume bars with the OHLC
 
@@ -18,15 +18,15 @@ import pandas as pd
 
 
 def volume_bars(
-    volume: pd.Series[float],
-    close: pd.Series[float],
+    volume: pd.Series,
+    close: pd.Series,
     traded_volume: float,
 ) -> pd.DataFrame:
     """Function to create volume bars with the OHLC [open, high, low, close] prices.
 
     Parameters:
-        volume (pd.Series[float]): Volume of a given stock in a given period.
-        close (pd.Series[float]): Close prices of a given stock in a given period.
+        volume (pd.Series): Volume of a given stock in a given period.
+        close (pd.Series): Close prices of a given stock in a given period.
         traded_volume (float): Number of shares traded in each bar.
 
     Returns:
@@ -58,15 +58,15 @@ def volume_bars(
 
 
 def dollar_bars(
-    volume: pd.Series[float],
-    close: pd.Series[float],
+    volume: pd.Series,
+    close: pd.Series,
     dollar_amount: float,
 ) -> pd.DataFrame:
     """Function to create dollar bars with the OHLC [open, high, low, close] prices.
 
     Parameters:
-        volume (pd.Series[float]): Volume of a given stock in a given period.
-        close (pd.Series[float]): Close prices of a given stock in a given period.
+        volume (pd.Series): Volume of a given stock in a given period.
+        close (pd.Series): Close prices of a given stock in a given period.
         dollar_amount (float): Dollar amount traded in each bar.
 
     Returns:
@@ -95,11 +95,11 @@ def dollar_bars(
     return dollar_bars_ohlc
 
 
-def time_bars(close: pd.Series[float], time_range: str) -> pd.DataFrame:
+def time_bars(close: pd.Series, time_range: str) -> pd.DataFrame:
     """Function to create time bars with the OHLC [open, high, low, close] prices.
 
     Parameters:
-        close (pd.Series[float]): Close prices of a given stock in a given period.
+        close (pd.Series): Close prices of a given stock in a given period.
         time_range (str): Time period for the bars (e.g., '3d' for 3 days).
 
     Returns:

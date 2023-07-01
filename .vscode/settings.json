@@ -1,9 +1,12 @@
 {
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
     "editor.formatOnSave": true,
     "editor.rulers": [
         88
     ],
     "editor.wordWrapColumn": 88,
-    "python.formatting.provider": "black",
+    "python.formatting.provider": "none",
     "python.linting.enabled": true
 }

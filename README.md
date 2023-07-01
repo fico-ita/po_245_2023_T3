@@ -5,7 +5,9 @@ Investments operating.
 
 ## Project
 
-On this repository, you will find the code for the **Meta-Labeling Application** for financial
+On this repository, you will find the code for the **Meta-Labeling Application** for
+financial applications. The project is based on the research of
+[Lima (2023)](#citation).
 
 ## Usage
 
@@ -30,8 +32,6 @@ Python 3.11 or higher is required. The project requires the following packages:
 - `pandas`
 - `numpy`
 - `scikit-learn`
-- `matplotlib`
-- `seaborn`
 
 ### Example
 

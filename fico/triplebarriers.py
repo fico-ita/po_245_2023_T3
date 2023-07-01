@@ -231,8 +231,8 @@ def get_events(  # noqa: PLR0913
 
     Parameters:
         close (pd.Series): Close prices.
-        t_events (pd.DatetimeIndex): Series of t_events. These are timestamps that
-        will seed every triple barrier.
+        t_events (pd.DatetimeIndex): Series of t_events. These are timestamps that \
+            will seed every triple barrier.
         pt_sl (np.ndarray): 2-element array: \\
             - Element 0 indicates the profit-taking level. \\
             - Element 1 is the stop-loss level. \\

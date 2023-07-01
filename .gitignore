@@ -175,6 +175,7 @@ pyrightconfig.json
 
 # Data
 /data
-/materials
+/docs/materials
+/docs/tutorials
 
 # End of https://www.toptal.com/developers/gitignore/api/python

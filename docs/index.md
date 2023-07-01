@@ -25,18 +25,20 @@ the intention to allow the reader to develop the project.
 
 The documentation is organized in 4 topcis, according to the type:
 
-1. Tutorials
-2. How-To guides
-3. Reference
-4. Explanation
+1. How-To guides
+1. Example
+3. API Reference
+4. Developer Guide
 
-On the Tutorial topic, the reader will find a learning-oriented documentation, with a
-practical application of the solution. The How-To guides topic is a documentation with a
- step-by-step guide to perform a specific task. The Reference topic is a documentation
- with a detailed description of the methods and techniques used in the solution. The
- Explanation topic is a documentation with a detailed description of the solution,
- with the purpose of clarifying the decisions made during the development of the
- solution.
+The How-To guides topic is a documentation with a step-by-step guide to perform a
+specific task.
+On the Example topic, the reader will find a learning-oriented documentation,
+with a practical application of the solution.
+The API Reference topic is a documentation with a detailed description of the methods
+and techniques used in the solution.
+The Developer Guide topic is a documentation with a detailed description of the
+solution, with the purpose of clarifying the decisions made during the development
+of the solution.
 
 ## FICO packages
 
@@ -45,9 +47,9 @@ practical application of the solution. The How-To guides topic is a documentatio
 ## Article
 
 The article is available on document
-[finance-machine-learning-meta-labeling-application](/materials/lima2023finance.pdf).
+[finance-machine-learning-meta-labeling-application](materials/lima2023finance.pdf).
 
-# License
+## License
 
 Project under license [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 
