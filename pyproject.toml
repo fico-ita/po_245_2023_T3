@@ -1,13 +1,19 @@
 [tool.poetry]
 name = "fico"
 version = "0.1.0"
-description = "Projeto teste do FICO"
-authors = ["curtis <curtis@ita.br>"]
+description = "Finance Machine Learning: Meta-Labeling Application"
+authors = ["lima <renandcl@ita.br>"]
 license = "ITA"
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+numpy = "^1.25.0"
+pandas = "^2.0.2"
+scikit-learn = "^1.2.2"
+matplotlib = "^3.7.1"
+seaborn = "^0.12.2"
+mkdocs-glightbox = "^0.3.4"
 
 [tool.poetry.group.dev.dependencies]
 mkdocs = "^1.4.2"
@@ -17,6 +23,7 @@ pre-commit = "^3.2.2"
 black = "^23.3.0"
 ruff = "^0.0.262"
 nbqa = "^1.7.0"
+ipykernel = "^6.23.3"
 
 [tool.black]
 target-version = ["py311"]

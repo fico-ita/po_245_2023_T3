@@ -1,0 +1,12 @@
+cff-version: 1.0.0
+type: generic
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "D.C. Lima"
+  given-names: "Renan"
+  orcid: "https://orcid.org/0000-0003-4690-5238"
+title: "Finance Machine Learning: Meta-Labeling Application"
+version: 0.1.0
+date-released: 2023-06-26
+url: "https://github.com/fico-ita/po_245_2023_T3"
+doi: "10.5281/zenodo.0000000"

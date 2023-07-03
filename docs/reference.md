@@ -1,6 +1,24 @@
 This part of the project documentation focuses on an **information-oriented** approach.
-Use it as a reference for the technical implementation of the `calculator` project code.
+Use it as a reference for the technical implementation of the methods project code.
 
-## Calculations
+# FICO methods
 
-::: fico.calculations
+## Chronological Sampling methods
+
+::: fico.chronologicalsampling
+
+## Technical Indicators methods
+
+::: fico.technicalindicators
+
+## Triple barrier methods
+
+::: fico.triplebarriers
+
+## Meta labeling Pipelines
+
+::: fico.metalabeling
+
+## Utils
+
+::: fico.utils
