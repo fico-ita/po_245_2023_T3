@@ -5,19 +5,19 @@ This module allows to perform the triple barrier method with meta-labeling.
 The module contains the following functions:
 
 - add_vertical_barrier(t_events, close, num_days) - Adds a vertical barrier at a
-certain number of days after the event.
+    certain number of days after the event.
 - apply_pt_sl_on_t1(close, events, pt_sl, molecule) - Applies the stop loss and
-profit taking, if it takes place before the vertical barrier.
+    profit taking, if it takes place before the vertical barrier.
 - barrier_touched(df) - Determine whether the returns have touched a barrier.
 - get_bins(events, close) - Labels the events
 - get_events(close, t_events, pt_sl, target, min_ret, num_threads,
-vertical_barrier_times, side) - Finds the timestamps of the events, when the price
-hits the threshold.
+    vertical_barrier_times, side) - Finds the timestamps of the events, when the price
+    hits the threshold.
 - get_t_events(close, threshold) - Finds the timestamps of the events, when the
-price hits the threshold.
+    price hits the threshold.
 - get_volatility(close, window_length, delta) - Computes the daily volatility at
-intraday estimation points, applying a span of delta days to an exponentially
-weighted moving standard deviation.
+    intraday estimation points, applying a span of delta days to an exponentially
+    weighted moving standard deviation.
 
 
 """

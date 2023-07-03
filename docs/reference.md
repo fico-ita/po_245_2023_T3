@@ -14,3 +14,11 @@ Use it as a reference for the technical implementation of the methods project co
 ## Triple barrier methods
 
 ::: fico.triplebarriers
+
+## Meta labeling Pipelines
+
+::: fico.metalabeling
+
+## Utils
+
+::: fico.utils

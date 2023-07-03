@@ -451,7 +451,7 @@ touch and the target volatility.
 
 With the events of the triple barrier, it can be applied the labels for side and size
 of the bet. The side of the bet is the direction of the bet, which can be long,
-short or neutral as signals 1, -1 and 0, respectively. The size of the bet can be
+short or neutral as signals $1$, $-1$ and $0$, respectively. The size of the bet can be
 considered the return of on the first touch of the triple barrier, which can be
 considered as the profit taking or stop loss.
 
@@ -481,11 +481,57 @@ Bollinger Bands indicator to generate signals. The Bollinger Bands indicator
 consists of a middle SMA line and two outer bands, which are the standard
 deviation of the SMA. The strategy is based on the assumption that the price
 will return to the mean, which is the middle SMA line. The strategy is
-implemented as follows:
+implemented as follows[[6]](#6):
 
-* **Entry rule**: Long when the price touches the lower band and short when
-the price touches the upper band.
-* **Exit rule**: Exit the position when the price touches the middle SMA line.
+The signals are long and short, long when the price touches the lower band
+and short when the price touches the upper band.
+
+```python
+>>> from fico.technicalindicators import bollingerbandssignal
+>>> bollinger_df = bollingerbandssignal(close, 50, 2)
+            close   ewm_mean      upper      lower  label  side_long  side_short  side
+date
+2002-12-31  42.94  42.940000        NaN        NaN    NaN        NaN         NaN  -1.0
+2003-01-02  44.64  43.807000  46.211163  41.402837    NaN        NaN         NaN  -1.0
+2003-01-03  45.24  44.303898  46.675516  41.932280    NaN        NaN         NaN  -1.0
+2003-01-06  46.32  44.838560  47.649506  42.027614    NaN        NaN         NaN  -1.0
+2003-01-07  47.65  45.446712  48.983805  41.909619    NaN        NaN         NaN  -1.0
+```
+
+Plotting the Bollinger Bands strategy:
+
+```python
+>>> bollinger_df.close.plot(
+...     figsize=(20, 10),
+...     legend=True,
+...     title="IBM Bollinger Bands Strategy",
+...     xlabel="Date",
+...     ylabel="Price",
+...     label="Close price",
+...     alpha=0.5,
+... )
+>>> bollinger_df.upper.plot(legend=True, label="Upper band")
+>>> bollinger_df.lower.plot(legend=True, label="Lower band")
+>>> # arrows signals
+>>> plt.plot(
+...     bollinger_df.loc[bollinger_df.side_long == 1].index,
+...     bollinger_df.lower[bollinger_df.side_long == 1],
+...     "^",
+...     markersize=10,
+...     color="g",
+... )
+>>>
+>>> plt.plot(
+...     bollinger_df.loc[bollinger_df.side_short == 1].index,
+...     bollinger_df.upper[bollinger_df.side_short == 1],
+...     "v",
+...     markersize=10,
+...     color="r",
+... )
+>>> plt.show()
+```
+
+![bollinger bands](images/bollinger_bands.png)
 
 ### Trend Following Strategy
 
@@ -500,6 +546,55 @@ is a signal $(1)$ of buying the position, and when the fast moving average cross
 the slow moving average from above, it is a signal of $(-1)$ of selling the
 position [[6]](#6).
 
+```python
+>>> from fico.technicalindicators import trendfollowsignal
+>>> trend_df = trendfollowsignal(close, 50, 200)
+>>> trend_df.head()
+            close       fast       slow  label  side_short  side_long  side
+date
+2002-12-31  42.94  42.940000  42.940000    NaN         NaN        NaN   1.0
+2003-01-02  44.64  43.807000  43.794250    1.0         NaN        1.0   1.0
+2003-01-03  45.24  44.303898  44.280994    0.0         NaN        NaN   1.0
+2003-01-06  46.32  44.838560  44.798417    0.0         NaN        NaN   1.0
+2003-01-07  47.65  45.446712  45.380197    0.0         NaN        NaN   1.0
+```
+
+Plotting the signals of the trend following strategy:
+
+```python
+>>> trend_df.close.plot(
+...     figsize=(20, 10),
+...     legend=True,
+...     title="IBM Trend Following Strategy",
+...     xlabel="Date",
+...     ylabel="Price",
+...     label="Close price",
+...     alpha=0.5,
+... )
+>>>
+>>> trend_df.fast.plot(legend=True, label="50 days EMA")
+>>> trend_df.slow.plot(legend=True, label="200 days EMA")
+>>> plt.plot(
+...     trend_df.side_long.loc[trend_df.side_long==1].index,
+...     trend_df.fast.loc[trend_df.side_long==1],
+...     "^",
+...     markersize=7,
+...     color="g",
+... )
+>>>
+>>> plt.plot(
+...     trend_df.side_short.loc[trend_df.side_short==1].index,
+...     trend_df.slow.loc[trend_df.side_short==1],
+...     "v",
+...     markersize=7,
+...     color="r",
+... )
+>>>
+>>> plt.show()
+```
+
+![trend_following](images/trend_following.png)
+
 ## Meta-Labeling
 
 Meta-labeling build a secondary ML model that learns how to use a primary
@@ -513,14 +608,13 @@ bet or pass, a purely binary prediction. When the predicted label is $1$, it can
 used the probability of this secondary prediction to derive the size of the bet,
 where the side (sign) of the position has been set by the primary model [[5]](#5).
 
+![meta-labeling](images/meta_labeling.png)
+
 On the first step, an evaluation on Receiver Operating Characteristic (ROC) curve is
 performed to find the best threshold to filter the primary model signals with maximum
-acceptable recall. Then, the primary model is trained with the prediction of the
+acceptable recall. Then, the secondary model is trained with the prediction of the
 primary model to ensure that the precision of the primary model is maximized and
 as consequence maximize the f-1 score.
-
-Moreover, the secondary model could consider exogenous signals, which are signals
-that are not related to the primary model, such as the trend following strategy.
 
 ## References
 
@@ -558,6 +652,10 @@ Does meta labeling add to signal efficacy.
 <a id="7">[7]</a>
 Sefidian, A. M. (2021).
 Labeling financial data for Machine Learning. Sefidian Academy.
+
+<a id="8">[8]</a>
+Cerqueira, V. (2023).
+9 Techniques for Cross-validating Time Series Data. Vitor Cerqueira, Medium.
 
 <!--
 \bibitem{b9} P. Nousiainen, Exploration of a trading strategy system based on meta-labeling and hybrid modeling using the SigTechPlatform. 2021. -->

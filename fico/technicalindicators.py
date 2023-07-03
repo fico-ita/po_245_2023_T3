@@ -10,7 +10,8 @@ The module contains the following functions:
     Bollinger Bands strategy.
 - `bollingerbandssignal(close_prices, window, no_of_stdev)` - Creates dataframe for the\
     Bollinger Bands strategy.
-
+- `trendfollowsignal(close_prices, fast_window, slow_window)` - Creates dataframe for\
+    the Trend Following strategy.
 
 """
 
@@ -102,10 +103,9 @@ def bollingerbandssignal(
 
     Returns:
         (pd.DataFrame): A dataframe containing the side signals for the Bollinger
-            Bands series, labels and signals.
+            Bands series, labels, signals, and side
     """
-    df_signals = pd.DataFrame(close_prices)
-    df_signals.columns = ["close"]
+    df_signals = pd.DataFrame({"close": close_prices})
 
     # compute bollinger bands
     df_signals["ewm_mean"], df_signals["upper"], df_signals["lower"] = bollingerbands(
@@ -146,5 +146,46 @@ def bollingerbandssignal(
     # Remove Look ahead biase by lagging the signal
     df_signals.side_short = df_signals.side_short.diff()
     df_signals.side_short.loc[df_signals.side_short == 0] = np.nan
+
+    # compute side
+    df_signals["side"] = df_signals["label"].replace(0, np.nan).ffill().bfill()
+
+    return df_signals
+
+
+def trendfollowsignal(
+    close_prices: pd.Series,
+    fast: int,
+    slow: int,
+) -> pd.DataFrame:
+    """Trend following signal for a given dataframe of prices.
+
+    On this function we will use the side labels to generate the signals for the
+    Trend Following strategy, removing the look ahead bias by lagging the signal.
+
+    Parameters:
+        close_prices (pd.Series): Close prices of a given stock.
+        fast (int): Fast moving average.
+        slow (int): Slow moving average.
+
+    Returns:
+        (pd.DataFrame): A dataframe containing the side signals for the Trend Following
+            series, labels and signals.
+    """
+    df_signals = pd.DataFrame({"close": close_prices})
+
+    # compute exponential moving averages
+    df_signals["fast"] = df_signals["close"].ewm(span=fast).mean()
+    df_signals["slow"] = df_signals["close"].ewm(span=slow).mean()
+
+    # compute labels
+    df_signals["label"] = (df_signals["fast"] > df_signals["slow"]).astype(int).diff()
+
+    # compute sides
+    df_signals.loc[df_signals["label"] == -1, "side_short"] = 1
+    df_signals.loc[df_signals["label"] == 1, "side_long"] = 1
+
+    # compute side
+    df_signals["side"] = df_signals["label"].replace(0, np.nan).ffill().bfill()
 
     return df_signals
